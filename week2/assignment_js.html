@@ -32,19 +32,20 @@ function findAndPrint(messages, currentStation) {
   let minDistance = Infinity;
   let closestFriend = null;
 
-    // 比較currentStation與每位朋友站點的index
-    for (const friend in frdlocation) {
-      const station = frdlocation[friend];
-      let stationIndex
-      //先判斷是否在Xiaobitan
-      if (station === "Xiaobitan") {
-        stationIndex = greenLine.indexOf("Qizhang") + 1;
-      } else {
-        stationIndex = greenLine.indexOf(station);
+  // 比較currentStation與每位朋友站點的index
+  for (const friend in frdlocation) {
+    const station = frdlocation[friend];
+    let stationIndex;
+    let distance;
+    // 如果朋友在Xiaobitan站點
+    if (station === "Xiaobitan") {
+      if (currentStation === "Qizhang") {
+        distance = 1; // 因為Xiaobitan與Qizhang相鄰
+      }
+    } else {
+      stationIndex = greenLine.indexOf(station);
+      distance = Math.abs(stationIndex - currentIndex);
     }
-
-    //計算index差距
-    let distance = Math.abs(stationIndex - currentIndex); 
 
     // 取出index差距最小的
     if (distance < minDistance) {
@@ -53,7 +54,7 @@ function findAndPrint(messages, currentStation) {
     }    
   }
   console.log(`${closestFriend}`);
-};
+}
 
 const messages={
   "Bob":"I'm at Ximen MRT station.",
@@ -68,6 +69,7 @@ findAndPrint(messages, "Songshan"); // print Copper
 findAndPrint(messages, "Qizhang"); // print Leslie 
 findAndPrint(messages, "Ximen"); // print Bob 
 findAndPrint(messages, "Xindian City Hall"); // print Vivian
+
 
 
 //Task 2
