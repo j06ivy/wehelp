@@ -49,20 +49,15 @@ findAndPrint(messages, "Xindian City Hall")  # print Vivian
 
 print("==task2==")
 def book(consultants, hour, duration, criteria):
-    # Sort consultants based on the given criteria
     if criteria == "rate":
         consultants.sort(key=lambda x: x[criteria], reverse=True)
     elif criteria == "price":
         consultants.sort(key=lambda x: x[criteria])
 
-    # Create a new booking
     new_booking = {"hour": hour, "duration": duration}
-
-    # Find the first available consultant
     available = next((consultant for consultant in consultants if not consultant.get("bookings") or all(not (hour < booking["hour"] + booking["duration"] and hour + duration > booking["hour"]) for booking in consultant["bookings"])), None)
 
     if available:
-        # Add the new booking to the consultant's bookings
         available.setdefault("bookings", []).append(new_booking)
         print(f"{available['name']}")
     else:
@@ -87,7 +82,6 @@ def func(*data):
     name_data = list(data)
     middle_name_data = []
 
-    # Get middle names
     for name in name_data:
         middle_name = ""
         if len(name) <= 3:
@@ -95,11 +89,8 @@ def func(*data):
         elif len(name) > 3:
             middle_name = name[2]
         middle_name_data.append(middle_name)
-
-    # Find unique middle name indices
     unique_index = [i for i, char in enumerate(middle_name_data) if middle_name_data.count(char) == 1]
 
-    # Print result
     if not unique_index:
         print("沒有")
     else:
