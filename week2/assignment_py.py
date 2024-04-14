@@ -52,6 +52,7 @@ findAndPrint(messages, "Songshan") # print Copper
 findAndPrint(messages, "Qizhang") # print Leslie
 findAndPrint(messages, "Ximen") # print Bob
 findAndPrint(messages, "Xindian City Hall") # print Vivian
+findAndPrint(messages, "Dapinglin") # print Mary
 
 print("==task2==")
 def book(consultants, hour, duration, criteria):
