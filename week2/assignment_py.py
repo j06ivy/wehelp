@@ -1,17 +1,17 @@
 print("==task1==")
 
 frdlocation = {
-    "Leslie": "Xiaobitan",
-    "Bob": "Ximen",
-    "Mary": "Jingmei",
-    "Copper": "Taipei Arena",
-    "Vivian": "Xindian"
+  "Leslie": "Xiaobitan",
+  "Bob": "Ximen",
+  "Mary": "Jingmei",
+  "Copper": "Taipei Arena",
+  "Vivian": "Xindian"
 }
 
 greenLine = [
-    "Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjiang Nanjing", "Zhongshan",
-    "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-shek Memorial Hall", "Guting", "Taipower Building",
-    "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"
+  "Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjiang Nanjing", "Zhongshan",
+  "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-shek Memorial Hall", "Guting", "Taipower Building",
+  "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"
 ]
 
 def findAndPrint(messages, currentStation):
@@ -20,32 +20,39 @@ def findAndPrint(messages, currentStation):
     closestFriend = None
 
     for friend, station in frdlocation.items():
-        if station == "Xiaobitan":
-            stationIndex = greenLine.index("Qizhang") - 0.1
-        else:
-            stationIndex = greenLine.index(station)
+        stationIndex = None
+        distance = None
+        if station in greenLine:  # 檢查 station 是否在 greenLine 中
+            if station == "Xiaobitan":
+                stationIndex = greenLine.index(station)
+                if currentStation == "Qizhang":
+                    distance = 1
+            else:
+                stationIndex = greenLine.index(station)
+                distance = abs(stationIndex - currentIndex)
 
-        distance = abs(stationIndex - currentIndex)
+            if distance is not None:
+                if distance < minDistance:
+                    minDistance = distance
+                    closestFriend = friend
 
-        if distance < minDistance:
-            minDistance = distance
-            closestFriend = friend
+    if closestFriend is not None:
+        print(f"{closestFriend}")
 
-    print(closestFriend)
-
-messages = {
-    "Bob": "I'm at Ximen MRT station.",
-    "Mary": "I have a drink near Jingmei MRT station.",
-    "Copper": "I just saw a concert at Taipei Arena.",
-    "Leslie": "I'm at home near Xiaobitan station.",
-    "Vivian": "I'm at Xindian station waiting for you."
+messages={
+  "Bob": "I'm at Ximen MRT station.",
+  "Mary": "I have a drink near Jingmei MRT station.",
+  "Copper": "I just saw a concert at Taipei Arena.",
+  "Leslie": "I'm at home near Xiaobitan station.",
+  "Vivian": "I'm at Xindian station waiting for you."
 }
 
-findAndPrint(messages, "Wanlong")  # print Mary
-findAndPrint(messages, "Songshan")  # print Copper
-findAndPrint(messages, "Qizhang")  # print Leslie
-findAndPrint(messages, "Ximen")  # print Bob
-findAndPrint(messages, "Xindian City Hall")  # print Vivian
+findAndPrint(messages, "Wanlong") # print Mary
+findAndPrint(messages, "Songshan") # print Copper
+findAndPrint(messages, "Qizhang") # print Leslie
+findAndPrint(messages, "Ximen") # print Bob
+findAndPrint(messages, "Xindian City Hall") # print Vivian
+findAndPrint(messages, "Dapinglin") # print Mary
 
 print("==task2==")
 def book(consultants, hour, duration, criteria):
